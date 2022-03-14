@@ -1,9 +1,10 @@
 import React from "react"
-import Button from "./shared/Button"
+import FormDropdown from "./components/shared/FormDropdown"
+
 const App = () => {
   return (
-    <div className="mx-24 py-10">
-      <Button type="error">HI</Button>
+    <div className="p-10 h-screen w-full bg-base-100">
+      <FormDropdown />
     </div>
   )
 }
