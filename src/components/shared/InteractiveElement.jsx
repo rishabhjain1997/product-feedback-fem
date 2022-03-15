@@ -8,7 +8,7 @@ const InteractiveElement = ({ type, children }) => {
       className={`${
         type === "upvote" ? "px-2.5 py-2" : "py-1.5 px-4"
       }  bg-base-300 flex flex-col content-center 
-      justify-center rounded-xl hover:bg-success active:bg-primary group`}
+      justify-center rounded-xl hover:bg-success active:bg-primary group max-w-fit h-7`}
     >
       {type === "upvote" && (
         <FontAwesomeIcon

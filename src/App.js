@@ -1,11 +1,23 @@
 import React from "react"
-import FormDropdown from "./components/shared/FormDropdown"
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import FeedbackDetail from "./pages/FeedbackDetail"
+import FeedbackEdit from "./pages/FeedbackEdit"
+import FeedbackNew from "./pages/FeedbackNew"
+import Roadmap from "./pages/Roadmap"
+import Suggestions from "./pages/Suggestions"
 const App = () => {
   return (
-    <div className="p-10 h-screen w-full bg-base-100">
-      <FormDropdown />
-    </div>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Suggestions />} />
+          <Route path="/feedback-detail" element={<FeedbackDetail />} />
+          <Route path="/feedback-edit" element={<FeedbackEdit />} />
+          <Route path="/feedback-new" element={<FeedbackNew />} />
+          <Route path="/roadmap" element={<Roadmap />} />
+        </Routes>
+      </Router>
+    </>
   )
 }
 
