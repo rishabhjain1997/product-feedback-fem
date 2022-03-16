@@ -5,12 +5,12 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons"
 
 const RoadmapStats = () => {
   return (
-    <div className="py-4 px-6 h-44 w-56 xl:w-64 bg-base-100 grid grid-rows-5 gap-2 rounded-lg">
+    <div className="py-4 px-6 h-44 w-[223px] lg:w-72 xl:w-64 bg-base-100 grid grid-rows-5 gap-2 rounded-lg">
       <div className="row-span-2 flex flex-row justify-between">
         <p className="text-neutral font-bold text-lg self-center">Roadmap</p>
         <Link
           to="/roadmap"
-          className="text-primary self-center font-semibold text-sm underline"
+          className="text-primary self-center font-semibold text-sm underline hover:text-secondary"
         >
           View
         </Link>
