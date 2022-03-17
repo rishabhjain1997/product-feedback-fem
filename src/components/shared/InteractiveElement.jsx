@@ -2,18 +2,24 @@ import React from "react"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleUp } from "@fortawesome/free-solid-svg-icons"
-const InteractiveElement = ({ type, children }) => {
+const InteractiveElement = ({ type, children, layout }) => {
   return (
     <div
       className={`${
-        type === "upvote" ? "px-2.5 py-2" : "py-1.5 px-4"
-      }  bg-base-300 flex flex-col content-center 
-      justify-center rounded-xl hover:bg-success active:bg-primary group max-w-fit h-7`}
+        type !== "upvote"
+          ? "py-4 px-4"
+          : layout === "col"
+          ? "px-2.5 py-7"
+          : "px-2.5 py-4"
+      }  bg-base-300 flex ${layout === "col" && "flex-col"} content-center 
+      justify-center rounded-lg hover:bg-success active:bg-primary group max-w-fit h-7`}
     >
       {type === "upvote" && (
         <FontAwesomeIcon
           icon={faAngleUp}
-          className=" self-center mb-2 font-bold text-primary group-active:text-base-100"
+          className={`self-center  ${
+            layout === "col" ? "mb-2" : "mr-2"
+          }  font-bold text-primary group-active:text-base-100`}
         />
       )}
       <div
@@ -28,6 +34,7 @@ const InteractiveElement = ({ type, children }) => {
 }
 
 InteractiveElement.defaultProps = {
+  layout: "col",
   type: "tag",
 }
 
