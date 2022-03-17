@@ -7,7 +7,7 @@ import Roadmap from "./pages/Roadmap"
 import Suggestions from "./pages/Suggestions"
 const App = () => {
   return (
-    <>
+    <div>
       <Router>
         <Routes>
           <Route path="/" element={<Suggestions />} />
@@ -17,7 +17,7 @@ const App = () => {
           <Route path="/roadmap" element={<Roadmap />} />
         </Routes>
       </Router>
-    </>
+    </div>
   )
 }
 
