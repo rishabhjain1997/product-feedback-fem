@@ -44,12 +44,11 @@ const Button = ({ children, type }) => {
 
   const [defaultColor, setDefaultColor] = useState(bgColor(type).default)
   const [hoverColor, setHoverColor] = useState(bgColor(type).hover)
-  console.log(hoverColor)
-  console.log(typeof hoverColor)
+
   return (
     <button
       type="button"
-      className={`h-11 w-40 rounded-xl text-sm font-bold ${defaultColor} ${hoverColor} flex content-center justify-center`}
+      className={`h-10 md:h-[44px] md:w-40 w-32 rounded-xl text-xs md:text-sm font-bold ${defaultColor} ${hoverColor} flex content-center justify-center`}
     >
       {(type === "back" || type === "back-dark") && (
         <ArrowBackIosNewIcon style={{ fontSize: 12 }} className="self-center" />

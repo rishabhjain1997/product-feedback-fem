@@ -20,7 +20,8 @@ const InteractiveSort = () => {
   return (
     <div className="relative">
       <button
-        className="bg-success-content py-6 px-4 text-base-300 rounded-xl flex flex-row align-center justify-center"
+        className="bg-success-content py-4 md:py-6 px-0 md:px-4 text-base-300 text-xs md:text-sm 
+        lg:text-base xl:text-sm rounded-xl flex flex-row align-center justify-center"
         onClick={() => {
           setIsDropdownOpen((prev) => {
             return !prev
@@ -36,18 +37,18 @@ const InteractiveSort = () => {
           >{` ${sortClass[sortBy]}`}</span>
         </div>
         <FontAwesomeIcon
-          className="ml-2 text-base-100 self-center"
+          className="ml-1 md:ml-2 text-base-100 self-center"
           icon={isDropdownOpen ? faAngleUp : faAngleDown}
         />
       </button>
 
       <div
-        className={`absolute mt-4 w-64 flex flex-col bg-base-100 shadow-xl rounded-xl ${
+        className={`absolute mt-4 w-52 md:w-64 flex flex-col bg-base-100 shadow-xl rounded-xl ${
           isDropdownOpen ? "visible" : "invisible"
         }`}
       >
         <button
-          className="text-left text-base px-6 py-3 text-info border-b-2 border-base-300 flex justify-between hover:text-secondary"
+          className="text-left text-xs md:text-sm lg:text-base  xl:text-sm px-6 py-2 md:py-3 text-info border-b-2 border-base-300 flex justify-between hover:text-secondary"
           onClick={() => {
             setSortBy("mostUpvotes")
             setIsDropdownOpen(false)
@@ -62,7 +63,7 @@ const InteractiveSort = () => {
           )}
         </button>
         <button
-          className="text-left text-base px-6 py-3 text-info border-b-2 border-base-300 flex justify-between hover:text-secondary"
+          className="text-left text-xs md:text-sm lg:text-base  xl:text-sm px-6 py-2 md:py-3 text-info border-b-2 border-base-300 flex justify-between hover:text-secondary"
           onClick={() => {
             setSortBy("leastUpvotes")
             setIsDropdownOpen(false)
@@ -77,7 +78,7 @@ const InteractiveSort = () => {
           )}
         </button>
         <button
-          className="text-left text-base px-6 py-3 text-info border-b-2 border-base-300 flex justify-between hover:text-secondary"
+          className="text-left text-xs md:text-sm lg:text-base xl:text-sm px-6 py-2 md:py-3 text-info border-b-2 border-base-300 flex justify-between hover:text-secondary"
           onClick={() => {
             setSortBy("mostComments")
             setIsDropdownOpen(false)
@@ -92,7 +93,7 @@ const InteractiveSort = () => {
           )}
         </button>
         <button
-          className="text-left text-base px-6 py-3 text-info flex justify-between hover:text-secondary"
+          className="text-left text-xs md:text-sm lg:text-base xl:text-sm px-6 py-2 md:py-3 text-info flex justify-between hover:text-secondary"
           onClick={() => {
             setSortBy("leastComments")
             setIsDropdownOpen(false)
