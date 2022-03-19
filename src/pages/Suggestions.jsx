@@ -5,7 +5,7 @@ import SuggestionsList from "../components/suggestions/SuggestionsList"
 import EmptySuggestions from "../components/suggestions/EmptySuggestions"
 
 const Suggestions = () => {
-  const isEmpty = false
+  const isEmpty = true
   return (
     <div className="bg-base-200 min-h-screen ">
       <div

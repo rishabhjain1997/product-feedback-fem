@@ -9,12 +9,13 @@ const FormDropdown = ({ options }) => {
   return (
     <div className="relative">
       <div
-        className="w-fit hover:outline-none hover:ring-1 hover:ring-primary hover:rounded-md"
-        onClick={() => {
-          setIsDropdownOpen(true)
+        className="w-full hover:outline-none hover:ring-1 hover:ring-primary hover:rounded-md"
+        onClick={(e) => {
+          e.preventDefault()
+          setIsDropdownOpen((prevState) => !prevState)
         }}
       >
-        <button className="w-64 h-12 px-6 py-auto bg-base-200 rounded-md flex flex-row justify-between align-center">
+        <button className="w-full h-12 px-6 py-auto bg-base-200 rounded-md flex flex-row justify-between align-center">
           <span className="self-center text-base text-neutral">{selected}</span>
           <FontAwesomeIcon
             icon={faAngleDown}
@@ -24,7 +25,7 @@ const FormDropdown = ({ options }) => {
       </div>
 
       <div
-        className={`absolute top-0 w-64 flex flex-col bg-base-100 shadow-xl rounded-xl ${
+        className={`absolute top-12 mt-4 w-full flex flex-col bg-base-100 shadow-xl rounded-xl ${
           isDropdownOpen ? "visible" : "invisible"
         }`}
       >
@@ -35,7 +36,8 @@ const FormDropdown = ({ options }) => {
                 index !== options.length - 1 && " border-b-2 border-base-300"
               }`}
               key={option}
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault()
                 setSelected(option)
                 setIsDropdownOpen(false)
               }}
@@ -50,21 +52,6 @@ const FormDropdown = ({ options }) => {
             </button>
           )
         })}
-        {/* <button
-          className="text-left text-base px-6 py-3 text-info border-b-2 border-base-300 flex justify-between hover:text-secondary"
-          onClick={() => {
-            setSelected("mostUpvotes")
-            setIsDropdownOpen(false)
-          }}
-        >
-          Most Upvotes
-          {selected === "mostUpvotes" && (
-            <FontAwesomeIcon
-              className="self-center text-secondary fa-lg"
-              icon={faCheck}
-            />
-          )}
-        </button> */}
       </div>
     </div>
   )

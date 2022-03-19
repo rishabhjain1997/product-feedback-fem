@@ -20,13 +20,15 @@ const EmptySuggestions = () => {
         Got a suggestion? Found a bug that needs to be squashed? We love hearing
         about new ideas to improve our app.
       </p>
-      <Button type="secondary">
-        <FontAwesomeIcon
-          className="mr-1 text-base-100 text-xs md:text-sm self-center"
-          icon={faPlus}
-        />
-        Add Feedback
-      </Button>
+      <div className="md:w-40 w-32">
+        <Button type="secondary">
+          <FontAwesomeIcon
+            className="mr-1 text-base-100 text-xs md:text-sm self-center"
+            icon={faPlus}
+          />
+          Add Feedback
+        </Button>
+      </div>
     </div>
   )
 }

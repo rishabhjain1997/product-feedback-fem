@@ -4,7 +4,7 @@ import Button from "../shared/Button"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faLightbulb } from "@fortawesome/free-solid-svg-icons"
 
-const SortSuggestions = () => {
+const SuggestionsMenu = () => {
   return (
     <div className="w-full h-14 md:h-20 md:rounded-lg  px-6 bg-success-content flex flex-row justify-between items-center">
       <div className="flex flex-row items-center">
@@ -19,16 +19,17 @@ const SortSuggestions = () => {
           <InteractiveSort />
         </div>
       </div>
-
-      <Button type="secondary">
-        <FontAwesomeIcon
-          className="mr-1 text-base-100 text-xs md:text-sm self-center"
-          icon={faPlus}
-        />
-        Add Feedback
-      </Button>
+      <div className="md:w-40 w-32">
+        <Button type="secondary">
+          <FontAwesomeIcon
+            className="mr-1 text-base-100 text-xs md:text-sm self-center"
+            icon={faPlus}
+          />
+          Add Feedback
+        </Button>
+      </div>
     </div>
   )
 }
 
-export default SortSuggestions
+export default SuggestionsMenu

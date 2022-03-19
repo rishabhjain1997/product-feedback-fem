@@ -1,15 +1,15 @@
 import React, { useState } from "react"
 
-const FormTextField = () => {
+const FormTextarea = () => {
   const [inputText, setInputText] = useState("")
   const [error, setError] = useState("")
   return (
     <div className="flex flex-col self-stretch">
-      <input
-        type="text"
-        name="input"
-        id="input"
-        className={`self-stretch h-12 text-sm px-6 rounded-md bg-base-200
+      <textarea
+        name="detail"
+        id="detail"
+        cols="70"
+        className={`self-stretch h-28 md:h-24 text-sm px-6 py-3 rounded-md bg-base-200
 
       ${
         error.length === 0
@@ -22,7 +22,7 @@ const FormTextField = () => {
   )
 }
 
-export default FormTextField
+export default FormTextarea
 
 // ${
 //   type === "detail" ? "h-28 md:h-24" : "h-12"

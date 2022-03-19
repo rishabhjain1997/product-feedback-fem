@@ -23,7 +23,8 @@ const Button = ({ children, type }) => {
           hover: "hover:bg-neutral-focus",
         }
       case "back":
-        return { default: "bg-base-100 text-info", hover: "hover:underline" }
+        return { default: "bg-transparent text-info", hover: "hover:underline" }
+
       case "back-dark":
         return {
           default: "bg-success-content text-base-100",
@@ -44,16 +45,23 @@ const Button = ({ children, type }) => {
 
   const [defaultColor, setDefaultColor] = useState(bgColor(type).default)
   const [hoverColor, setHoverColor] = useState(bgColor(type).hover)
-
+  // md:w-40 w-32
   return (
     <button
       type="button"
-      className={`h-10 md:h-[44px] md:w-40 w-32 rounded-xl text-xs md:text-sm font-bold ${defaultColor} ${hoverColor} flex content-center justify-center`}
+      className={`h-10 md:h-[44px] w-full  rounded-xl text-xs md:text-sm font-bold 
+      ${defaultColor} ${hoverColor} flex content-center 
+      ${type !== "back" ? "justify-center" : "justify-start"} `}
     >
       {(type === "back" || type === "back-dark") && (
-        <ArrowBackIosNewIcon style={{ fontSize: 12 }} className="self-center" />
+        <ArrowBackIosNewIcon
+          style={{ fontSize: 12 }}
+          className={`self-center ${
+            type === "back" ? "text-primary" : "text-info"
+          } font-bold mr-2.5`}
+        />
       )}
-      <div className="self-center ml-2.5">{children}</div>
+      <div className="self-center">{children}</div>
     </button>
   )
 }
