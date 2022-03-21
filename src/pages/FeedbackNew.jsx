@@ -8,7 +8,7 @@ import { ReactComponent as NewFeedbackIcon } from "../assets/shared/icon-new-fee
 const FeedbackNew = () => {
   return (
     <div className="w-full min-h-screen bg-base-200 px-6 py-9 md:px-0 md:py-14 flex flex-col items-center">
-      <div className="w-[540px]">
+      <div className="w-full md:w-[540px]">
         <Button type="back">Go Back</Button>
       </div>
       <form

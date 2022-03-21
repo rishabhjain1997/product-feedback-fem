@@ -3,8 +3,6 @@ import Button from "../shared/Button"
 import { ReactComponent as EmptyIllustration } from "../../assets/suggestions/illustration-empty.svg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
-import SuggestionsCard from "../suggestions/SuggestionCard"
-import SuggestionsList from "./SuggestionsList"
 
 const EmptySuggestions = () => {
   return (
