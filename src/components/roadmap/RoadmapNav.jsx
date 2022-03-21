@@ -8,6 +8,7 @@ import { useState } from "react"
 const RoadmapNav = () => {
   // in-progress, planned, live
   const [tab, setTab] = useState("in-progress")
+
   const getTabDetails = () => {
     if (tab === "in-progress") {
       return { name: "In-Progress", description: "Currently being developed" }
@@ -40,7 +41,7 @@ const RoadmapNav = () => {
         <div className="h-14 w-full bg-base-200 shadow-sm grid grid-cols-3 text-gray-400">
           <div
             className={`cursor-pointer flex flex-col items-center justify-center border-b-4 ${
-              tab === "planned" ? "border-secondary" : "border-base-200"
+              tab === "planned" ? "border-warning" : "border-base-200"
             }`}
             onClick={() => setTab("planned")}
           >
@@ -68,7 +69,7 @@ const RoadmapNav = () => {
           </div>
           <div
             className={`cursor-pointer flex flex-col items-center justify-center border-b-4 ${
-              tab === "live" ? "border-secondary" : "border-base-200"
+              tab === "live" ? "border-accent" : "border-base-200"
             }`}
             onClick={() => setTab("live")}
           >

@@ -1,10 +1,15 @@
 import React from "react"
+import RoadmapCard from "../components/roadmap/RoadmapCard"
 import RoadmapNav from "../components/roadmap/RoadmapNav"
 
 const Roadmap = () => {
   return (
     <div className="w-full h-screen bg-base-200">
       <RoadmapNav />
+      <div className="my-4 px-6 md:px-0 md:w-[689px] xl:w-[1110px] md:mx-auto md:grid md:grid-cols-3 md:gap-4">
+        <RoadmapCard />
+      </div>
+
       <div>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan
         magna eu malesuada semper. Duis ac nulla quam. Morbi rutrum, diam in
