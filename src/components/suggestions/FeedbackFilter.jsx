@@ -1,10 +1,25 @@
 import React from "react"
-import InteractiveElement from "../shared/InteractiveElement"
+import FeedbackFilterInteractive from "./FeedbackFilterInteractive"
+import { useState } from "react"
 const FeedbackFilter = ({ tags }) => {
+  const [activeTag, setActiveTag] = useState(tags[0])
+  const activateTag = (tag) => {
+    console.log(tag)
+    setActiveTag(tag)
+  }
   return (
-    <div className="py-4 px-6 h-44 w-[223px] lg:w-72 xl:w-64 bg-base-100 rounded-lg flex flex-row flex-wrap space-x-2">
+    <div className="py-4 px-6 h-44 w-[223px] lg:w-72 xl:w-64 bg-base-100 rounded-lg grid grid-rows-3 gap-2 grid-flow-col-dense">
       {tags.map((tag) => {
-        return <InteractiveElement key={tag}>{tag}</InteractiveElement>
+        return (
+          <FeedbackFilterInteractive
+            key={tag}
+            tag={tag}
+            isActive={activeTag === tag}
+            activateFilter={activateTag}
+          >
+            {tag}
+          </FeedbackFilterInteractive>
+        )
       })}
     </div>
   )

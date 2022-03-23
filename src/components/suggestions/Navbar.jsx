@@ -45,7 +45,7 @@ const Navbar = () => {
       </div>
       <div className="hidden md:block">
         {/*   lg:max-w-[944px] */}
-        <div className="pt-14 pb-10 mx-10 mx-auto xl:p-0 flex flex-row xl:flex-col xl:space-y-6 justify-between content-center">
+        <div className="pt-14 pb-10 mx-auto xl:p-0 flex flex-row xl:flex-col xl:space-y-6 justify-between content-center">
           <div className="h-44 xl:h-32 w-[223px] lg:w-72 xl:w-64 rounded-lg bg-gradient-to-tr from-primary via-secondary to-warning ">
             <div className="mt-24 xl:mt-16 ml-6">
               <h3 className="text-base-100 text-xl font-bold">
