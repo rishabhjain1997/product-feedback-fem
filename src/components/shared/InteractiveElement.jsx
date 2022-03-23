@@ -12,7 +12,7 @@ const InteractiveElement = ({ type, children, layout }) => {
           ? "px-2.5 py-7"
           : "px-2.5 py-4"
       }  bg-base-300 flex ${layout === "col" && "flex-col"} content-center 
-      justify-center rounded-lg hover:bg-success active:bg-primary group max-w-fit h-7`}
+      justify-center rounded-lg hover:bg-success active:bg-primary group max-w-fit h-7 cursor-pointer`}
     >
       {type === "upvote" && (
         <FontAwesomeIcon

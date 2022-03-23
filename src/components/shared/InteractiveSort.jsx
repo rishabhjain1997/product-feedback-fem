@@ -6,9 +6,9 @@ import {
   faCheck,
 } from "@fortawesome/free-solid-svg-icons"
 
-const InteractiveSort = () => {
+const InteractiveSort = ({ sortSuggestions }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [sortBy, setSortBy] = useState("mostComments")
+  const [sortBy, setSortBy] = useState("mostUpvotes")
 
   const sortClass = {
     mostUpvotes: "Most Upvotes",
@@ -52,6 +52,7 @@ const InteractiveSort = () => {
           onClick={() => {
             setSortBy("mostUpvotes")
             setIsDropdownOpen(false)
+            sortSuggestions("mostUpvotes")
           }}
         >
           Most Upvotes
@@ -67,6 +68,7 @@ const InteractiveSort = () => {
           onClick={() => {
             setSortBy("leastUpvotes")
             setIsDropdownOpen(false)
+            sortSuggestions("leastUpvotes")
           }}
         >
           Least Upvotes
@@ -82,6 +84,7 @@ const InteractiveSort = () => {
           onClick={() => {
             setSortBy("mostComments")
             setIsDropdownOpen(false)
+            sortSuggestions("mostComments")
           }}
         >
           Most Comments
@@ -97,6 +100,7 @@ const InteractiveSort = () => {
           onClick={() => {
             setSortBy("leastComments")
             setIsDropdownOpen(false)
+            sortSuggestions("leastComments")
           }}
         >
           Least Comments

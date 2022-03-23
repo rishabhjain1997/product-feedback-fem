@@ -3,7 +3,9 @@ import InteractiveElement from "../shared/InteractiveElement"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faComment } from "@fortawesome/free-solid-svg-icons"
 
-const SuggestionCard = () => {
+const SuggestionCard = ({ suggestion }) => {
+  const { category, title, description, upvotes, comments } = suggestion.data
+
   return (
     <div
       className="bg-base-100 rounded-lg  
@@ -11,26 +13,28 @@ const SuggestionCard = () => {
     >
       <div className="hidden md:flex flex-row items-center mr-10 self-center">
         <InteractiveElement type="upvote" layout="col">
-          112
+          {upvotes}
         </InteractiveElement>
       </div>
       <div className="flex flex-col  justify-between w-full">
-        <h4 className="font-bold text-sm text-neutral">
-          Add tags for solutions
-        </h4>
-        <p>Easier to search for solutions based on a specific stack.</p>
+        <h4 className="font-bold text-sm text-neutral">{title}</h4>
+        <p>{description}</p>
 
-        <InteractiveElement type="tag">Enhancement</InteractiveElement>
+        <InteractiveElement type="tag">
+          {category.charAt(0).toUpperCase() + category.substr(1).toLowerCase()}
+        </InteractiveElement>
         <div className="flex flex-row justify-between  md:hidden">
           <InteractiveElement type="upvote" layout="row">
-            112
+            {upvotes}
           </InteractiveElement>
           <div className="flex flex-row items-center">
             <FontAwesomeIcon
               icon={faComment}
               className="self-center font-bold text-lg text-[#CDD2EE] mr-1"
             />
-            <p className="text-neutral text-sm font-bold">4</p>
+            <p className="text-neutral text-sm font-bold">
+              {comments?.length ?? 0}
+            </p>
           </div>
         </div>
       </div>
@@ -40,7 +44,9 @@ const SuggestionCard = () => {
           icon={faComment}
           className="self-center font-bold text-lg text-[#CDD2EE] mr-1"
         />
-        <p className="text-neutral text-sm font-bold">4</p>
+        <p className="text-neutral text-sm font-bold">
+          {comments?.length ?? 0}
+        </p>
       </div>
     </div>
   )
