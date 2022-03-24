@@ -6,6 +6,8 @@ import { db } from "../../firebase.config"
 import { collection, getDocs } from "firebase/firestore"
 import Loading from "../../components/Loading"
 
+// TODO - Integrate with Context
+
 const RoadmapStats = () => {
   const [loading, setLoading] = useState(true)
   const [stats, setStats] = useState({})

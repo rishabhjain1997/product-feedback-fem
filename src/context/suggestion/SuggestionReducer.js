@@ -6,6 +6,13 @@ const suggestionReducer = (state, action) => {
         sortSuggestions: action.payload,
       }
 
+    case "SET_FILTER": {
+      return {
+        ...state,
+        filter: action.payload,
+      }
+    }
+
     case "SET_SUGGESTIONS":
       return {
         ...state,

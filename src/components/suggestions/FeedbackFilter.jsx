@@ -1,11 +1,13 @@
 import React from "react"
 import FeedbackFilterInteractive from "./FeedbackFilterInteractive"
-import { useState } from "react"
+import { useContext } from "react"
+import SuggestionContext from "../../context/suggestion/SuggestionContext"
+
 const FeedbackFilter = ({ tags }) => {
-  const [activeTag, setActiveTag] = useState(tags[0])
+  const { filter, dispatch } = useContext(SuggestionContext)
+
   const activateTag = (tag) => {
-    console.log(tag)
-    setActiveTag(tag)
+    dispatch({ type: "SET_FILTER", payload: tag })
   }
   return (
     <div className="py-4 px-6 h-44 w-[223px] lg:w-72 xl:w-64 bg-base-100 rounded-lg grid grid-rows-3 gap-2 grid-flow-col-dense">
@@ -14,7 +16,7 @@ const FeedbackFilter = ({ tags }) => {
           <FeedbackFilterInteractive
             key={tag}
             tag={tag}
-            isActive={activeTag === tag}
+            isActive={filter === tag}
             activateFilter={activateTag}
           >
             {tag}
