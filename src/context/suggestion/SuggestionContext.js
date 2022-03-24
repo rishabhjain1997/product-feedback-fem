@@ -8,7 +8,7 @@ export const SuggestionProvider = ({ children }) => {
     suggestions: null,
     loading: true,
     // stats: {},
-    filter: "All",
+    filter: "all",
     sortSuggestions: "mostUpvotes",
   }
   const [state, dispatch] = useReducer(suggestionReducer, initialState)

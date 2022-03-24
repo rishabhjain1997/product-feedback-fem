@@ -9,7 +9,7 @@ const suggestionReducer = (state, action) => {
     case "SET_FILTER": {
       return {
         ...state,
-        filter: action.payload,
+        filter: action.payload.toLowerCase(),
       }
     }
 

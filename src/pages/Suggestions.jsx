@@ -9,17 +9,40 @@ import Loading from "../components/Loading"
 import SuggestionContext from "../context/suggestion/SuggestionContext"
 
 const Suggestions = () => {
-  const { suggestions, loading, dispatch } = useContext(SuggestionContext)
+  const { suggestions, loading, dispatch, filter, sortSuggestions } =
+    useContext(SuggestionContext)
 
   useEffect(() => {
     const fetchSuggestions = async () => {
       dispatch({ type: "SET_LOADING" })
       const suggestionsRef = collection(db, "productRequests")
-      const q = query(
-        suggestionsRef,
-        where("status", "==", "suggestion"),
-        orderBy("upvotes", "desc")
-      )
+      let q
+      // const order =
+      //   sortSuggestions === "mostUpvotes" || sortSuggestions === "mostComments"
+      //     ? "asc"
+      //     : "desc"
+
+      // const orderFeature =
+      //   sortSuggestions === "mostUpvotes" || sortSuggestions === "leastUpvotes"
+      //     ? "upvotes"
+      //     : "comments"
+
+      if (filter !== "all") {
+        console.log(filter)
+        q = query(
+          suggestionsRef,
+          where("category", "==", filter),
+          where("status", "==", "suggestion"),
+          orderBy("upvotes", "desc")
+        )
+      } else {
+        q = query(
+          suggestionsRef,
+          where("status", "==", "suggestion"),
+          orderBy("upvotes", "desc")
+        )
+      }
+
       const querySnapshot = await getDocs(q)
       const feedbacks = []
       querySnapshot.forEach((doc) => {
@@ -29,9 +52,10 @@ const Suggestions = () => {
         })
       })
       dispatch({ type: "SET_SUGGESTIONS", payload: feedbacks })
+      console.log(sortSuggestions)
     }
     fetchSuggestions()
-  }, [])
+  }, [filter])
 
   if (loading) {
     return <Loading />
