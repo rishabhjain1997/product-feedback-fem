@@ -7,9 +7,10 @@ import { db } from "../firebase.config"
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore"
 import Loading from "../components/Loading"
 import SuggestionContext from "../context/suggestion/SuggestionContext"
+import { sortSuggestions } from "../context/suggestion/SuggestionActions"
 
 const Suggestions = () => {
-  const { suggestions, loading, dispatch, filter, sortSuggestions } =
+  const { suggestions, loading, dispatch, filter, sortBy } =
     useContext(SuggestionContext)
 
   useEffect(() => {
@@ -17,18 +18,8 @@ const Suggestions = () => {
       dispatch({ type: "SET_LOADING" })
       const suggestionsRef = collection(db, "productRequests")
       let q
-      // const order =
-      //   sortSuggestions === "mostUpvotes" || sortSuggestions === "mostComments"
-      //     ? "asc"
-      //     : "desc"
-
-      // const orderFeature =
-      //   sortSuggestions === "mostUpvotes" || sortSuggestions === "leastUpvotes"
-      //     ? "upvotes"
-      //     : "comments"
 
       if (filter !== "all") {
-        console.log(filter)
         q = query(
           suggestionsRef,
           where("category", "==", filter),
@@ -51,8 +42,11 @@ const Suggestions = () => {
           data: doc.data(),
         })
       })
-      dispatch({ type: "SET_SUGGESTIONS", payload: feedbacks })
-      console.log(sortSuggestions)
+
+      dispatch({
+        type: "SET_SUGGESTIONS",
+        payload: sortSuggestions(sortBy, feedbacks),
+      })
     }
     fetchSuggestions()
   }, [filter])

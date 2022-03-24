@@ -1,14 +1,17 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
+import SuggestionContext from "../../context/suggestion/SuggestionContext"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faAngleUp,
   faAngleDown,
   faCheck,
 } from "@fortawesome/free-solid-svg-icons"
+import { sortSuggestions } from "../../context/suggestion/SuggestionActions"
 
-const InteractiveSort = ({ sortSuggestions }) => {
+const InteractiveSort = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [sortBy, setSortBy] = useState("mostUpvotes")
+  const { dispatch, sortBy, suggestions } = useContext(SuggestionContext)
 
   const sortClass = {
     mostUpvotes: "Most Upvotes",
@@ -50,9 +53,12 @@ const InteractiveSort = ({ sortSuggestions }) => {
         <button
           className="text-left text-xs md:text-sm lg:text-base  xl:text-sm px-6 py-2 md:py-3 text-info border-b-2 border-base-300 flex justify-between hover:text-secondary"
           onClick={() => {
-            setSortBy("mostUpvotes")
+            dispatch({ type: "SET_SORT", payload: "mostUpvotes" })
+
             setIsDropdownOpen(false)
-            sortSuggestions("mostUpvotes")
+            dispatch({ type: "SET_LOADING" })
+            const feedbacks = sortSuggestions("mostUpvotes", suggestions)
+            dispatch({ type: "SET_SUGGESTIONS", payload: feedbacks })
           }}
         >
           Most Upvotes
@@ -66,9 +72,12 @@ const InteractiveSort = ({ sortSuggestions }) => {
         <button
           className="text-left text-xs md:text-sm lg:text-base  xl:text-sm px-6 py-2 md:py-3 text-info border-b-2 border-base-300 flex justify-between hover:text-secondary"
           onClick={() => {
-            setSortBy("leastUpvotes")
+            dispatch({ type: "SET_SORT", payload: "leastUpvotes" })
+
             setIsDropdownOpen(false)
-            sortSuggestions("leastUpvotes")
+            dispatch({ type: "SET_LOADING" })
+            const feedbacks = sortSuggestions("leastUpvotes", suggestions)
+            dispatch({ type: "SET_SUGGESTIONS", payload: feedbacks })
           }}
         >
           Least Upvotes
@@ -82,9 +91,12 @@ const InteractiveSort = ({ sortSuggestions }) => {
         <button
           className="text-left text-xs md:text-sm lg:text-base xl:text-sm px-6 py-2 md:py-3 text-info border-b-2 border-base-300 flex justify-between hover:text-secondary"
           onClick={() => {
-            setSortBy("mostComments")
+            dispatch({ type: "SET_SORT", payload: "mostComments" })
+
             setIsDropdownOpen(false)
-            sortSuggestions("mostComments")
+            dispatch({ type: "SET_LOADING" })
+            const feedbacks = sortSuggestions("mostComments", suggestions)
+            dispatch({ type: "SET_SUGGESTIONS", payload: feedbacks })
           }}
         >
           Most Comments
@@ -98,9 +110,12 @@ const InteractiveSort = ({ sortSuggestions }) => {
         <button
           className="text-left text-xs md:text-sm lg:text-base xl:text-sm px-6 py-2 md:py-3 text-info flex justify-between hover:text-secondary"
           onClick={() => {
-            setSortBy("leastComments")
+            dispatch({ type: "SET_SORT", payload: "leastComments" })
+
             setIsDropdownOpen(false)
-            sortSuggestions("leastComments")
+            dispatch({ type: "SET_LOADING" })
+            const feedbacks = sortSuggestions("leastComments", suggestions)
+            dispatch({ type: "SET_SUGGESTIONS", payload: feedbacks })
           }}
         >
           Least Comments

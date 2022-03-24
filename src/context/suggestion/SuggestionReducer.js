@@ -3,7 +3,7 @@ const suggestionReducer = (state, action) => {
     case "SET_SORT":
       return {
         ...state,
-        sortSuggestions: action.payload,
+        sortBy: action.payload,
       }
 
     case "SET_FILTER": {
