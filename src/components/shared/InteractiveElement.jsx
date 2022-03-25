@@ -2,7 +2,14 @@ import React from "react"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleUp } from "@fortawesome/free-solid-svg-icons"
-const InteractiveElement = ({ type, children, layout }) => {
+const InteractiveElement = ({
+  type,
+  children,
+  layout,
+  incrementUpvote,
+  docId,
+  upvotes,
+}) => {
   return (
     <div
       className={`${
@@ -13,6 +20,7 @@ const InteractiveElement = ({ type, children, layout }) => {
           : "px-2.5 py-4"
       }  bg-base-300 flex ${layout === "col" && "flex-col"} content-center 
       justify-center rounded-lg hover:bg-success active:bg-primary group max-w-fit h-7 cursor-pointer`}
+      onClick={() => incrementUpvote(docId, upvotes)}
     >
       {type === "upvote" && (
         <FontAwesomeIcon

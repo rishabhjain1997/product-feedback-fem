@@ -13,7 +13,10 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Suggestions />} />
-            <Route path="/feedback-detail" element={<FeedbackDetail />} />
+            <Route
+              path="/feedback-detail/:feedbackId"
+              element={<FeedbackDetail />}
+            />
             <Route path="/feedback-edit" element={<FeedbackEdit />} />
             <Route path="/feedback-new" element={<FeedbackNew />} />
             <Route path="/roadmap" element={<Roadmap />} />
