@@ -48,6 +48,6 @@ export const sortSuggestions = (sortBy, suggestions) => {
         : 0
     })
   }
-  // console.log(sortBy, feedbacks)
+
   return feedbacks
 }

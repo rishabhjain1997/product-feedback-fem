@@ -15,7 +15,6 @@ const SuggestionCard = ({ suggestion }) => {
     suggestion.data
 
   const incrementUpvote = async (docId, upvotes) => {
-    console.log(docId)
     const docRef = doc(db, "productRequests", docId)
     try {
       await updateDoc(docRef, {
