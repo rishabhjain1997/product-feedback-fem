@@ -1,9 +1,14 @@
-import React, { useState } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleDown, faCheck } from "@fortawesome/free-solid-svg-icons"
+import FeedbackContext from "../../context/feedback/FeedbackContext"
 
 const FormDropdown = ({ options }) => {
-  const [selected, setSelected] = useState(options[0])
+  const { category, dispatch } = useContext(FeedbackContext)
+  useEffect(() => {
+    dispatch({ type: "SET_CATEGORY", payload: options[0] })
+  }, [options, dispatch])
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   return (
@@ -16,7 +21,7 @@ const FormDropdown = ({ options }) => {
         }}
       >
         <button className="w-full h-12 px-6 py-auto bg-base-200 rounded-md flex flex-row justify-between align-center">
-          <span className="self-center text-base text-neutral">{selected}</span>
+          <span className="self-center text-base text-neutral">{category}</span>
           <FontAwesomeIcon
             icon={faAngleDown}
             className=" self-center font-bold text-primary"
@@ -38,12 +43,12 @@ const FormDropdown = ({ options }) => {
               key={option}
               onClick={(e) => {
                 e.preventDefault()
-                setSelected(option)
+                dispatch({ type: "SET_CATEGORY", payload: option })
                 setIsDropdownOpen(false)
               }}
             >
               {option}
-              {selected === option && (
+              {category === option && (
                 <FontAwesomeIcon
                   className="self-center text-secondary fa-lg"
                   icon={faCheck}

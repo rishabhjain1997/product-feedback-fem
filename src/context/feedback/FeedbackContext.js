@@ -5,6 +5,7 @@ const FeedbackContext = createContext()
 
 export const FeedbackProvider = ({ children }) => {
   const initialState = {
+    loading: false,
     currentId: null,
     title: "",
     category: "",
@@ -12,6 +13,8 @@ export const FeedbackProvider = ({ children }) => {
     status: "",
     upvotes: 0,
     description: "",
+    titleError: "",
+    descriptionError: "",
   }
   const [state, dispatch] = useReducer(feedbackReducer, initialState)
   return (
@@ -20,3 +23,4 @@ export const FeedbackProvider = ({ children }) => {
     </FeedbackContext.Provider>
   )
 }
+export default FeedbackContext

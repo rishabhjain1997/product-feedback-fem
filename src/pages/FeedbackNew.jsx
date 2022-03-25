@@ -1,13 +1,65 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Button from "../components/shared/Button"
 import FormTextField from "../components/shared/FormTextField"
 import FormTextarea from "../components/shared/FormTextarea"
 import FormDropdown from "../components/shared/FormDropdown"
 import { ReactComponent as NewFeedbackIcon } from "../assets/shared/icon-new-feedback.svg"
 import { useNavigate } from "react-router-dom"
+import FeedbackContext from "../context/feedback/FeedbackContext"
+import { useContext } from "react"
+import { db } from "../firebase.config"
+import { collection, getDocs } from "firebase/firestore"
+import Loading from "../components/Loading"
 
 const FeedbackNew = () => {
   const navigate = useNavigate()
+  const {
+    dispatch,
+    loading,
+    currentId,
+    title,
+    category,
+    comments,
+    status,
+    upvotes,
+    description,
+  } = useContext(FeedbackContext)
+  const formSubmit = (e) => {
+    console.log(
+      currentId,
+      title,
+      category,
+      comments,
+      status,
+      upvotes,
+      description
+    )
+  }
+  useEffect(() => {
+    const fetchCurrentId = async () => {
+      dispatch({ type: "SET_LOADING" })
+
+      const suggestionsRef = collection(db, "productRequests")
+      const querySnapshot = await getDocs(suggestionsRef)
+      const feedbacks = []
+      querySnapshot.forEach((doc) => {
+        feedbacks.push({
+          id: doc.id,
+          data: doc.data(),
+        })
+      })
+      const feedbackIds = feedbacks.map((feedback) => feedback.data.id)
+      dispatch({
+        type: "SET_NEWFEEDBACK",
+        payload: Math.max(...feedbackIds) + 1,
+      })
+    }
+    fetchCurrentId()
+  }, [dispatch])
+
+  if (loading) {
+    return <Loading />
+  }
   return (
     <div className="w-full min-h-screen bg-base-200 px-6 py-9 md:px-0 md:py-14 flex flex-col items-center">
       <div
@@ -52,7 +104,7 @@ const FeedbackNew = () => {
           <FormTextarea />
         </div>
         <div className="flex flex-col space-y-4 self-stretch mt-10 md:mt-8 md:flex-row-reverse md:space-y-0 md:space-x-4 md:space-x-reverse md:self-end">
-          <div className="md:w-36">
+          <div className="md:w-36" onClick={formSubmit}>
             <Button type="secondary">Add feedback</Button>
           </div>
           <div
