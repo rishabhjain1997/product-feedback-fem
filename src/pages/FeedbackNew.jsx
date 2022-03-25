@@ -4,11 +4,18 @@ import FormTextField from "../components/shared/FormTextField"
 import FormTextarea from "../components/shared/FormTextarea"
 import FormDropdown from "../components/shared/FormDropdown"
 import { ReactComponent as NewFeedbackIcon } from "../assets/shared/icon-new-feedback.svg"
+import { useNavigate } from "react-router-dom"
 
 const FeedbackNew = () => {
+  const navigate = useNavigate()
   return (
     <div className="w-full min-h-screen bg-base-200 px-6 py-9 md:px-0 md:py-14 flex flex-col items-center">
-      <div className="w-full md:w-[540px]">
+      <div
+        className="w-full md:w-[540px]"
+        onClick={() => {
+          navigate(-1)
+        }}
+      >
         <Button type="back">Go Back</Button>
       </div>
       <form
@@ -48,7 +55,12 @@ const FeedbackNew = () => {
           <div className="md:w-36">
             <Button type="secondary">Add feedback</Button>
           </div>
-          <div className="md:w-24">
+          <div
+            className="md:w-24"
+            onClick={() => {
+              navigate(-1)
+            }}
+          >
             <Button type="neutral">Cancel</Button>
           </div>
         </div>
