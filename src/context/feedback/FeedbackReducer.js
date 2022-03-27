@@ -5,6 +5,20 @@ const feedbackReducer = (state, action) => {
         ...state,
         loading: true,
       }
+    case "CLEAR_FEEDBACK":
+      return {
+        ...state,
+        loading: false,
+        currentId: null,
+        title: "",
+        category: "",
+        comments: [],
+        status: "",
+        upvotes: 0,
+        description: "",
+        titleError: "",
+        descriptionError: "",
+      }
     case "SET_NEWFEEDBACK":
       return {
         ...state,

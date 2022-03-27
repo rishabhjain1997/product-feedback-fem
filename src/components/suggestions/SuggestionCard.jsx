@@ -11,9 +11,9 @@ import { sortSuggestions } from "../../context/suggestion/SuggestionActions"
 
 const SuggestionCard = ({ suggestion }) => {
   const { suggestions, dispatch, sortBy } = useContext(SuggestionContext)
-  const { category, title, description, upvotes, comments, productId } =
-    suggestion.data
+  const { category, title, description, upvotes, comments } = suggestion.data
 
+  const productId = suggestion.data.id
   const incrementUpvote = async (docId, upvotes) => {
     const docRef = doc(db, "productRequests", docId)
     try {

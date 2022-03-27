@@ -65,6 +65,9 @@ const FeedbackNew = () => {
         upvotes: upvotes,
         title: title,
       })
+      dispatch({
+        type: "CLEAR_FEEDBACK",
+      })
       navigate("/")
       return
     } catch (error) {
@@ -102,6 +105,9 @@ const FeedbackNew = () => {
       <div
         className="w-full md:w-[540px]"
         onClick={() => {
+          dispatch({
+            type: "CLEAR_FEEDBACK",
+          })
           navigate(-1)
         }}
       >
@@ -147,6 +153,10 @@ const FeedbackNew = () => {
           <div
             className="md:w-24"
             onClick={() => {
+              dispatch({
+                type: "CLEAR_FEEDBACK",
+              })
+
               navigate(-1)
             }}
           >
