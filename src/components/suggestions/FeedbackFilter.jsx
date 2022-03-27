@@ -16,7 +16,7 @@ const FeedbackFilter = ({ tags }) => {
           <FeedbackFilterInteractive
             key={tag}
             tag={tag}
-            isActive={filter === tag}
+            isActive={filter === tag.toLowerCase()}
             activateFilter={activateTag}
           >
             {tag}

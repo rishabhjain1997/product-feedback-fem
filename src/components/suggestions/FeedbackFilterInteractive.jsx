@@ -13,7 +13,7 @@ const FeedbackFilterInteractive = ({
       justify-center rounded-lg hover:bg-success  ${
         isActive ? "bg-primary" : "bg-base-300"
       } max-w-fit h-7 cursor-pointer`}
-      onClick={() => activateFilter(tag)}
+      onClick={() => activateFilter(tag.toLowerCase())}
     >
       <div
         className={`w-fit self-center font-bold text-sm ${
