@@ -8,8 +8,9 @@ import { useNavigate } from "react-router-dom"
 import FeedbackContext from "../context/feedback/FeedbackContext"
 import { useContext } from "react"
 import { db } from "../firebase.config"
-import { collection, getDocs } from "firebase/firestore"
+import { collection, getDocs, setDoc, doc } from "firebase/firestore"
 import Loading from "../components/Loading"
+import { v4 as uuidv4 } from "uuid"
 
 const FeedbackNew = () => {
   const navigate = useNavigate()
@@ -24,16 +25,52 @@ const FeedbackNew = () => {
     upvotes,
     description,
   } = useContext(FeedbackContext)
-  const formSubmit = (e) => {
-    console.log(
-      currentId,
-      title,
-      category,
-      comments,
-      status,
-      upvotes,
-      description
-    )
+  const formSubmit = async (e) => {
+    e.preventDefault()
+    if (title.length < 10) {
+      dispatch({
+        type: "SET_TITLE_ERROR",
+        payload: "Title must be greater than 10 characters",
+      })
+      setTimeout(
+        () =>
+          dispatch({
+            type: "CLEAR_ERRORS",
+          }),
+        2000
+      )
+      return
+    }
+    if (description.length < 10) {
+      dispatch({
+        type: "SET_DESCRIPTION_ERROR",
+        payload: "Description must be greater than 10 characters",
+      })
+      setTimeout(
+        () =>
+          dispatch({
+            type: "CLEAR_ERRORS",
+          }),
+        2000
+      )
+      return
+    }
+    try {
+      await setDoc(doc(db, "productRequests", uuidv4()), {
+        id: currentId,
+        category: category.toLowerCase(),
+        comments: comments,
+        description: description,
+        status: status,
+        upvotes: upvotes,
+        title: title,
+      })
+      navigate("/")
+      return
+    } catch (error) {
+      // TODO - Change to toast
+      console.log(error)
+    }
   }
   useEffect(() => {
     const fetchCurrentId = async () => {

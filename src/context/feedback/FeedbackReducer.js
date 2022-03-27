@@ -27,6 +27,25 @@ const feedbackReducer = (state, action) => {
         ...state,
         title: action.payload,
       }
+    case "SET_TITLE_ERROR":
+      return {
+        ...state,
+        titleError: action.payload,
+      }
+
+    case "SET_DESCRIPTION_ERROR":
+      return {
+        ...state,
+        descriptionError: action.payload,
+      }
+
+    case "CLEAR_ERRORS":
+      return {
+        ...state,
+        descriptionError: "",
+        titleError: "",
+      }
+
     case "SET_STATUS":
       return {
         ...state,
