@@ -64,8 +64,10 @@ const SuggestionCard = ({ suggestion }) => {
           <p>{description}</p>
 
           <InteractiveElement type="tag">
-            {category.charAt(0).toUpperCase() +
-              category.substr(1).toLowerCase()}
+            {category === "ui" || category === "ux"
+              ? category.toUpperCase()
+              : category.charAt(0).toUpperCase() +
+                category.substr(1).toLowerCase()}
           </InteractiveElement>
         </Link>
         <div className="flex flex-row justify-between md:hidden mt-4">
