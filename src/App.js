@@ -19,7 +19,10 @@ const App = () => {
                 path="/feedback-detail/:feedbackId"
                 element={<FeedbackDetail />}
               />
-              <Route path="/feedback-edit" element={<FeedbackEdit />} />
+              <Route
+                path="/feedback-edit/:feedbackId"
+                element={<FeedbackEdit />}
+              />
               <Route path="/feedback-new" element={<FeedbackNew />} />
               <Route path="/roadmap" element={<Roadmap />} />
             </Routes>

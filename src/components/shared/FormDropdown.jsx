@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleDown, faCheck } from "@fortawesome/free-solid-svg-icons"
 import FeedbackContext from "../../context/feedback/FeedbackContext"
 
-const FormDropdown = ({ options }) => {
-  const { category, dispatch } = useContext(FeedbackContext)
-  useEffect(() => {
-    dispatch({ type: "SET_CATEGORY", payload: options[0] })
-  }, [options, dispatch])
+const FormDropdown = ({ options, type }) => {
+  const { category, status, dispatch } = useContext(FeedbackContext)
+
+  let dispatcherType
+  dispatcherType = type === "category" ? "SET_CATEGORY" : "SET_STATUS"
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
@@ -21,7 +21,9 @@ const FormDropdown = ({ options }) => {
         }}
       >
         <button className="w-full h-12 px-6 py-auto bg-base-200 rounded-md flex flex-row justify-between align-center">
-          <span className="self-center text-base text-neutral">{category}</span>
+          <span className="self-center text-base text-neutral">
+            {type === "category" ? category : status}
+          </span>
           <FontAwesomeIcon
             icon={faAngleDown}
             className=" self-center font-bold text-primary"
@@ -30,7 +32,7 @@ const FormDropdown = ({ options }) => {
       </div>
 
       <div
-        className={`absolute top-12 mt-4 w-full flex flex-col bg-base-100 shadow-xl rounded-xl ${
+        className={`absolute top-12 mt-4 w-full flex flex-col bg-base-100 shadow-xl rounded-xl z-10	${
           isDropdownOpen ? "visible" : "invisible"
         }`}
       >
@@ -43,7 +45,7 @@ const FormDropdown = ({ options }) => {
               key={option}
               onClick={(e) => {
                 e.preventDefault()
-                dispatch({ type: "SET_CATEGORY", payload: option })
+                dispatch({ type: dispatcherType, payload: option })
                 setIsDropdownOpen(false)
               }}
             >
@@ -63,5 +65,7 @@ const FormDropdown = ({ options }) => {
 }
 FormDropdown.defaultProps = {
   options: ["Feature", "UI", "UX", "Enhacement", "Bug"],
+
+  type: "category",
 }
 export default FormDropdown

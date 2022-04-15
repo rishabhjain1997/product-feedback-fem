@@ -19,12 +19,33 @@ const feedbackReducer = (state, action) => {
         titleError: "",
         descriptionError: "",
       }
+    case "SET_EDITFEEDBACK":
+      return {
+        ...state,
+        loading: false,
+        category:
+          action.payload.category === "ui" || action.payload.category === "ux"
+            ? action.payload.category.toUpperCase()
+            : action.payload.category.charAt(0).toUpperCase() +
+              action.payload.category.substr(1).toLowerCase(),
+        comments: action.payload.comments,
+        description: action.payload.description,
+        currentId: action.payload.id,
+        status:
+          action.payload.status === "in-progress"
+            ? "In-Progress"
+            : action.payload.status.charAt(0).toUpperCase() +
+              action.payload.status.substr(1).toLowerCase(),
+        upvotes: action.payload.upvotes,
+        title: action.payload.title,
+      }
     case "SET_NEWFEEDBACK":
       return {
         ...state,
         currentId: action.payload,
         loading: false,
         status: "suggestion",
+        category: "Feature",
         // upvotes: 0,
         // titleError: "",
         // descriptionError: "",
