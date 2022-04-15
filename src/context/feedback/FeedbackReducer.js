@@ -38,6 +38,7 @@ const feedbackReducer = (state, action) => {
               action.payload.status.substr(1).toLowerCase(),
         upvotes: action.payload.upvotes,
         title: action.payload.title,
+        docId: action.payload.docId,
       }
     case "SET_NEWFEEDBACK":
       return {
