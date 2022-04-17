@@ -16,6 +16,7 @@ export const FeedbackProvider = ({ children }) => {
     titleError: "",
     descriptionError: "",
     docId: null,
+    newComment: "",
   }
   const [state, dispatch] = useReducer(feedbackReducer, initialState)
   return (

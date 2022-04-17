@@ -19,7 +19,12 @@ const feedbackReducer = (state, action) => {
         titleError: "",
         descriptionError: "",
       }
-    case "SET_EDITFEEDBACK":
+    case "SET_UPVOTES":
+      return {
+        ...state,
+        upvotes: action.payload,
+      }
+    case "SET_FEEDBACK":
       return {
         ...state,
         loading: false,

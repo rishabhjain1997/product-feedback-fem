@@ -3,41 +3,11 @@ import InteractiveElement from "../shared/InteractiveElement"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faComment } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router-dom"
-import { doc, updateDoc } from "firebase/firestore"
-import { db } from "../../firebase.config"
-import { useContext } from "react"
-import SuggestionContext from "../../context/suggestion/SuggestionContext"
-import { sortSuggestions } from "../../context/suggestion/SuggestionActions"
 
-const SuggestionCard = ({ suggestion }) => {
-  const { suggestions, dispatch, sortBy } = useContext(SuggestionContext)
+const SuggestionCard = ({ suggestion, incrementUpvote }) => {
   const { category, title, description, upvotes, comments } = suggestion.data
 
   const productId = suggestion.data.id
-  const incrementUpvote = async (docId, upvotes) => {
-    const docRef = doc(db, "productRequests", docId)
-    try {
-      await updateDoc(docRef, {
-        upvotes: upvotes + 1,
-      })
-      const updatedSuggestion = suggestions.filter(
-        (suggestion) => suggestion.id === docId
-      )[0]
-      updatedSuggestion.data.upvotes = upvotes + 1
-      let feedbacks = suggestions.filter(
-        (suggestion) => suggestion.id !== docId
-      )
-      feedbacks.push(updatedSuggestion)
-
-      dispatch({
-        type: "SET_SUGGESTIONS",
-        payload: sortSuggestions(sortBy, feedbacks),
-      })
-    } catch (error) {
-      // TODO - Change to Toast
-      console.log("Could not update")
-    }
-  }
 
   return (
     <div
@@ -58,13 +28,16 @@ const SuggestionCard = ({ suggestion }) => {
       <div className="flex flex-col w-full">
         <Link
           className="flex flex-col  justify-between w-full flex-1"
-          to={`/feedback-detail/${productId}`}
+          to={productId ? `/feedback-detail/${productId}` : "#"}
         >
           <h4 className="font-bold text-sm text-neutral">{title}</h4>
           <p>{description}</p>
 
           <InteractiveElement type="tag">
-            {category === "ui" || category === "ux"
+            {category === "ui" ||
+            category === "ux" ||
+            category === "UI" ||
+            category === "UX"
               ? category.toUpperCase()
               : category.charAt(0).toUpperCase() +
                 category.substr(1).toLowerCase()}
@@ -82,7 +55,7 @@ const SuggestionCard = ({ suggestion }) => {
           </InteractiveElement>
           <Link
             className="flex flex-row items-center"
-            to={`/feedback-detail/${productId}`}
+            to={productId ? `/feedback-detail/${productId}` : "#"}
           >
             <FontAwesomeIcon
               icon={faComment}

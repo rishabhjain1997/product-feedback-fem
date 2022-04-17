@@ -48,7 +48,7 @@ const FeedbackEdit = () => {
       })
       const feedback = feedbacks[0]
       dispatch({
-        type: "SET_EDITFEEDBACK",
+        type: "SET_FEEDBACK",
         payload: { ...feedback.data, docId: feedback.id },
       })
       console.log(feedback.data)
