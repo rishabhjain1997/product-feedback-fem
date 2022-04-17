@@ -18,11 +18,23 @@ const feedbackReducer = (state, action) => {
         description: "",
         titleError: "",
         descriptionError: "",
+        newComment: "",
       }
     case "SET_UPVOTES":
       return {
         ...state,
         upvotes: action.payload,
+      }
+    case "ADD_NEWCOMMENT":
+      return {
+        ...state,
+        newComment: "",
+        comments: [...state.comments, action.payload],
+      }
+    case "SET_NEWCOMMENT":
+      return {
+        ...state,
+        newComment: action.payload,
       }
     case "SET_FEEDBACK":
       return {
@@ -44,6 +56,7 @@ const feedbackReducer = (state, action) => {
         upvotes: action.payload.upvotes,
         title: action.payload.title,
         docId: action.payload.docId,
+        newComment: "",
       }
     case "SET_NEWFEEDBACK":
       return {
@@ -52,10 +65,7 @@ const feedbackReducer = (state, action) => {
         loading: false,
         status: "suggestion",
         category: "Feature",
-        // upvotes: 0,
-        // titleError: "",
-        // descriptionError: "",
-        // comments: [],
+        newComment: "",
       }
 
     case "SET_CURRENTID":
