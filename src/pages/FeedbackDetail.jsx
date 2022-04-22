@@ -6,6 +6,7 @@ import AddComment from "../components/comments/AddComment"
 import { useParams } from "react-router-dom"
 import { useContext, useEffect } from "react"
 import FeedbackContext from "../context/feedback/FeedbackContext"
+import CommentList from "../components/comments/CommentList"
 import {
   collection,
   query,
@@ -19,18 +20,8 @@ import { db } from "../firebase.config"
 const FeedbackDetail = () => {
   const navigate = useNavigate()
   const { feedbackId } = useParams()
-  const {
-    dispatch,
-    loading,
-    currentId,
-    title,
-    category,
-    comments,
-    status,
-    upvotes,
-    description,
-    docId,
-  } = useContext(FeedbackContext)
+  const { dispatch, title, category, comments, upvotes, description, docId } =
+    useContext(FeedbackContext)
 
   const incrementUpvote = async (docId, upvotes) => {
     const docRef = doc(db, "productRequests", docId)
@@ -68,7 +59,6 @@ const FeedbackDetail = () => {
         payload: { ...feedback.data, docId: feedback.id },
       })
     }
-
     fetchFeedback()
   }, [])
 
@@ -101,6 +91,9 @@ const FeedbackDetail = () => {
           }}
           incrementUpvote={incrementUpvote}
         />
+      </div>
+      <div className="mt-2">
+        <CommentList />
       </div>
       <div className="mt-6">
         <AddComment />
