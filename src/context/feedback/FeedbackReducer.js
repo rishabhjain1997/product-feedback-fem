@@ -26,6 +26,13 @@ const feedbackReducer = (state, action) => {
         upvotes: action.payload,
       }
     case "ADD_NEWCOMMENT":
+      if (state.comments) {
+        return {
+          ...state,
+          newComment: "",
+          comments: [action.payload],
+        }
+      }
       return {
         ...state,
         newComment: "",

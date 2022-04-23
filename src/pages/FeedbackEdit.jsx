@@ -51,7 +51,6 @@ const FeedbackEdit = () => {
         type: "SET_FEEDBACK",
         payload: { ...feedback.data, docId: feedback.id },
       })
-      console.log(feedback.data)
     }
 
     fetchFeedback()

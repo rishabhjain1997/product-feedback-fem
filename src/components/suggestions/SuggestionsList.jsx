@@ -32,7 +32,7 @@ const SuggestionsList = () => {
         }
         return suggestion
       })
-      console.log(feedbacks)
+
       dispatch({
         type: "SET_SUGGESTIONS",
         payload: sortSuggestions(sortBy, feedbacks),

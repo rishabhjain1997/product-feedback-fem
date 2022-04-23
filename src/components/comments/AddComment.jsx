@@ -40,10 +40,10 @@ const AddComment = () => {
           className="w-32 md:w-36"
           onClick={async (e) => {
             if (!characterLengthError && newComment.length) {
-              const commentIds = comments.map((comment) => comment.id)
-              const currentCommentId = comments.length
-                ? Math.max(...commentIds) + 1
-                : 0
+              const commentIds = comments?.map((comment) => comment.id)
+
+              const currentCommentId =
+                comments && comments.length ? Math.max(...commentIds) + 1 : 0
               const comment = {
                 id: currentCommentId,
                 content: newComment,
@@ -56,7 +56,7 @@ const AddComment = () => {
               }
               try {
                 await updateDoc(doc(db, "productRequests", docId), {
-                  comments: [...comments, comment],
+                  comments: comments ? [...comments, comment] : [comment],
                 })
 
                 dispatch({

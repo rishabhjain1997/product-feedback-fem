@@ -29,7 +29,7 @@ const FeedbackDetail = () => {
       await updateDoc(docRef, {
         upvotes: upvotes + 1,
       })
-      console.log(upvotes + 1)
+
       dispatch({
         type: "SET_UPVOTES",
         payload: upvotes + 1,
@@ -41,6 +41,8 @@ const FeedbackDetail = () => {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+
     const fetchFeedback = async () => {
       const feedbackRef = collection(db, "productRequests")
       const q = query(feedbackRef, where("id", "==", parseInt(feedbackId)))

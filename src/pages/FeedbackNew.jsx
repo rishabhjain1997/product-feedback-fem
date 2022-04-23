@@ -77,6 +77,10 @@ const FeedbackNew = () => {
   }
   useEffect(() => {
     // TODO - Clear Feedback here
+    dispatch({
+      type: "CLEAR_FEEDBACK",
+    })
+
     const fetchCurrentId = async () => {
       dispatch({ type: "SET_LOADING" })
 

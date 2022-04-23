@@ -9,6 +9,19 @@ const SuggestionCard = ({ suggestion, incrementUpvote }) => {
 
   const productId = suggestion.data.id
 
+  const calculateCommentsLength = () => {
+    if (!comments || !comments.length) {
+      return 0
+    }
+    let commentsLength = comments.length
+    for (let i = 0; i < comments.length; i++) {
+      const comment = comments[i]
+      commentsLength += comment.replies ? comment.replies.length : 0
+    }
+
+    return commentsLength
+  }
+
   return (
     <div
       className="bg-base-100 rounded-lg  
@@ -62,7 +75,7 @@ const SuggestionCard = ({ suggestion, incrementUpvote }) => {
               className="self-center font-bold text-lg text-[#CDD2EE] mr-1"
             />
             <p className="text-neutral text-sm font-bold">
-              {comments?.length ?? 0}
+              {calculateCommentsLength()}
             </p>
           </Link>
         </div>
@@ -77,7 +90,7 @@ const SuggestionCard = ({ suggestion, incrementUpvote }) => {
           className="self-center font-bold text-lg text-[#CDD2EE] mr-1"
         />
         <p className="text-neutral text-sm font-bold">
-          {comments?.length ?? 0}
+          {calculateCommentsLength()}
         </p>
       </Link>
     </div>
