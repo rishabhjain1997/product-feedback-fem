@@ -92,9 +92,12 @@ const FeedbackDetail = () => {
           incrementUpvote={incrementUpvote}
         />
       </div>
-      <div className="mt-2">
-        <CommentList />
-      </div>
+      {comments && (
+        <div className="mt-2">
+          <CommentList />
+        </div>
+      )}
+
       <div className="mt-6">
         <AddComment />
       </div>

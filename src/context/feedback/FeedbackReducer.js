@@ -31,6 +31,23 @@ const feedbackReducer = (state, action) => {
         newComment: "",
         comments: [...state.comments, action.payload],
       }
+    case "ADD_REPLY":
+      return {
+        ...state,
+        comments: state.comments.map((comment) => {
+          if (comment.id === action.payload.commentId) {
+            let reply = action.payload
+            delete reply.commentId
+            if (comment.replies) {
+              comment.replies = [...comment.replies, reply]
+            } else {
+              comment.replies = [reply]
+            }
+            return comment
+          }
+          return comment
+        }),
+      }
     case "SET_NEWCOMMENT":
       return {
         ...state,

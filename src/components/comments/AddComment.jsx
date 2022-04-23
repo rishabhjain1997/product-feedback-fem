@@ -1,14 +1,6 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useState, useContext } from "react"
 import FeedbackContext from "../../context/feedback/FeedbackContext"
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  deleteDoc,
-  doc,
-  updateDoc,
-} from "firebase/firestore"
+import { doc, updateDoc } from "firebase/firestore"
 import { db } from "../../firebase.config"
 import Button from "../shared/Button"
 const AddComment = () => {
@@ -48,7 +40,6 @@ const AddComment = () => {
           className="w-32 md:w-36"
           onClick={async (e) => {
             if (!characterLengthError && newComment.length) {
-              // TODO- Update on firebase
               const commentIds = comments.map((comment) => comment.id)
               const currentCommentId = comments.length
                 ? Math.max(...commentIds) + 1

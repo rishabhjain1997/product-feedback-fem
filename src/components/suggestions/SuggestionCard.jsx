@@ -70,7 +70,7 @@ const SuggestionCard = ({ suggestion, incrementUpvote }) => {
 
       <Link
         className="hidden md:flex flex-row items-center ml-auto self-center"
-        to={`/feedback-detail/${productId}`}
+        to={productId ? `/feedback-detail/${productId}` : "#"}
       >
         <FontAwesomeIcon
           icon={faComment}
