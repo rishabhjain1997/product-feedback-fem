@@ -1,11 +1,12 @@
 import React from "react"
 import Button from "../shared/Button"
-
+import { useNavigate, Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 
 const RoadmapNav = () => {
+  const navigate = useNavigate()
   // in-progress, planned, live
   const [tab, setTab] = useState("in-progress")
 
@@ -22,13 +23,18 @@ const RoadmapNav = () => {
       <div className="block md:hidden fixed w-full">
         <div className="bg-success-content h-24 w-full px-6 flex flex-row justify-between items-center">
           <div className="flex flex-col">
-            <div className="self-start w-[70px]">
+            <div
+              className="self-start w-[70px]"
+              onClick={() => {
+                navigate(-1)
+              }}
+            >
               <Button type="back-dark">Go Back</Button>
             </div>
 
             <h3 className="text-base-100 font-bold text-lg mt-1">Roadmap</h3>
           </div>
-          <div className="w-32">
+          <Link to="/feedback-new" className="w-32">
             <Button type="secondary">
               <FontAwesomeIcon
                 className="mr-1 text-base-100 text-xs md:text-sm self-center"
@@ -36,7 +42,7 @@ const RoadmapNav = () => {
               />
               Add Feedback
             </Button>
-          </div>
+          </Link>
         </div>
         <div className="h-14 w-full bg-base-200 shadow-sm grid grid-cols-3 text-gray-400">
           <div
@@ -92,13 +98,18 @@ const RoadmapNav = () => {
       <div className="hidden md:flex flex-col  w-[689px] xl:w-[1110px] mx-auto mt-14 xl:mt-20">
         <div className="px-8 h-28  rounded-lg bg-success-content text-base-100 flex flex-row justify-between items-center">
           <div className="flex flex-col">
-            <div className="self-start">
+            <div
+              className="self-start"
+              onClick={() => {
+                navigate(-1)
+              }}
+            >
               <Button type="back-dark">Go Back</Button>
             </div>
 
             <h3 className="text-base-100 font-bold text-2xl mt-1">Roadmap</h3>
           </div>
-          <div className="w-40">
+          <Link to="/feedback-new" className="w-40">
             <Button type="secondary">
               <FontAwesomeIcon
                 className="mr-1 text-base-100 text-xs md:text-sm self-center"
@@ -106,7 +117,7 @@ const RoadmapNav = () => {
               />
               Add Feedback
             </Button>
-          </div>
+          </Link>
         </div>
         <div className="mt-8 xl:mt-12 w-full h-11 xl:h-auto bg-base-200 grid grid-cols-3 gap-2.5">
           <div className="flex flex-col justify-between items-start">

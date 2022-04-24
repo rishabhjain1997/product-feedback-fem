@@ -1,5 +1,6 @@
 import React from "react"
 import Button from "../shared/Button"
+import { Link } from "react-router-dom"
 import { ReactComponent as EmptyIllustration } from "../../assets/suggestions/illustration-empty.svg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
@@ -18,7 +19,7 @@ const EmptySuggestions = () => {
         Got a suggestion? Found a bug that needs to be squashed? We love hearing
         about new ideas to improve our app.
       </p>
-      <div className="md:w-40 w-32">
+      <Link to="/feedback-new" className="md:w-40 w-32">
         <Button type="secondary">
           <FontAwesomeIcon
             className="mr-1 text-base-100 text-xs md:text-sm self-center"
@@ -26,7 +27,7 @@ const EmptySuggestions = () => {
           />
           Add Feedback
         </Button>
-      </div>
+      </Link>
     </div>
   )
 }
