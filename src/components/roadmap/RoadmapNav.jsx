@@ -8,7 +8,13 @@ import RoadmapContext from "../../context/roadmap/RoadmapContext"
 
 const RoadmapNav = () => {
   const navigate = useNavigate()
-  const { dispatch, tab } = useContext(RoadmapContext)
+  const {
+    dispatch,
+    tab,
+    liveFeedbacks,
+    plannedFeedbacks,
+    inProgressFeedbacks,
+  } = useContext(RoadmapContext)
 
   const getTabDetails = () => {
     if (tab === "in-progress") {
@@ -18,6 +24,16 @@ const RoadmapNav = () => {
     }
     return { name: "Live", description: "Released features" }
   }
+
+  const getTabFeedbackLength = () => {
+    if (tab === "in-progress") {
+      return inProgressFeedbacks?.length
+    } else if (tab === "planned") {
+      return plannedFeedbacks?.length
+    }
+    return liveFeedbacks?.length
+  }
+
   return (
     <div className="w-full">
       <div className="block md:hidden fixed w-full">
@@ -61,7 +77,7 @@ const RoadmapNav = () => {
                 tab === "planned" && "text-neutral"
               }`}
             >
-              Planned (2)
+              Planned ({plannedFeedbacks?.length ?? 0})
             </p>
           </div>
           <div
@@ -80,7 +96,7 @@ const RoadmapNav = () => {
                 tab === "in-progress" && "text-neutral"
               }`}
             >
-              In-Progress (2)
+              In-Progress ({inProgressFeedbacks?.length ?? 0})
             </p>
           </div>
           <div
@@ -99,7 +115,7 @@ const RoadmapNav = () => {
                 tab === "live" && "text-neutral"
               }`}
             >
-              Live (1)
+              Live ({liveFeedbacks?.length ?? 0})
             </p>
           </div>
         </div>
@@ -107,7 +123,7 @@ const RoadmapNav = () => {
       <div className="flex flex-col items-start justify-between md:hidden pt-44 px-6">
         <h3 className="text-neutral font-bold text-lg">{`${
           getTabDetails().name
-        } (2)`}</h3>
+        } (${getTabFeedbackLength()})`}</h3>
         <p className="text-info text-sm mt-1">{getTabDetails().description}</p>
       </div>
       <div className="hidden md:flex flex-col  w-[689px] xl:w-[1110px] mx-auto mt-14 xl:mt-20">
@@ -137,7 +153,7 @@ const RoadmapNav = () => {
         <div className="mt-8 xl:mt-12 w-full h-11 xl:h-auto bg-base-200 grid grid-cols-3 gap-2.5">
           <div className="flex flex-col justify-between items-start">
             <p className="text-neutral font-bold text-sm xl:text-lg">
-              Planned (2)
+              Planned ({plannedFeedbacks?.length ?? 0})
             </p>
             <p className="text-info text-sm xl:text-base">
               Ideas prioritized for research
@@ -145,7 +161,7 @@ const RoadmapNav = () => {
           </div>
           <div className="flex flex-col justify-between items-start">
             <p className="text-neutral font-bold text-sm xl:text-lg">
-              In-Progress (3)
+              In-Progress ({inProgressFeedbacks?.length ?? 0})
             </p>
             <p className="text-info text-sm xl:text-base">
               Currently being developed
@@ -153,7 +169,7 @@ const RoadmapNav = () => {
           </div>
           <div className="flex flex-col justify-between items-start">
             <p className="text-neutral font-bold text-sm xl:text-lg">
-              Live (1)
+              Live ({liveFeedbacks?.length ?? 0})
             </p>
             <p className="text-info text-sm xl:text-base">Released features</p>
           </div>

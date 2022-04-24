@@ -1,23 +1,38 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import InteractiveElement from "../shared/InteractiveElement"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faComment, faCircle } from "@fortawesome/free-solid-svg-icons"
+import RoadmapContext from "../../context/roadmap/RoadmapContext"
 
-const RoadmapCard = () => {
-  const [tab, setTab] = useState("planned")
+const RoadmapCard = ({ feedback }) => {
+  const { status, category, title, description, upvotes, comments } = feedback
+
+  const calculateCommentsLength = () => {
+    if (!comments || !comments.length) {
+      return 0
+    }
+    let commentsLength = comments.length
+    for (let i = 0; i < comments.length; i++) {
+      const comment = comments[i]
+      commentsLength += comment.replies ? comment.replies.length : 0
+    }
+
+    return commentsLength
+  }
+
   const tabColor = () => {
-    if (tab === "planned") {
+    if (status === "planned") {
       return "warning"
     }
-    if (tab === "in-progress") {
+    if (status === "in-progress") {
       return "secondary"
     }
     return "accent"
   }
   const getTabDetails = () => {
-    if (tab === "in-progress") {
+    if (status === "in-progress") {
       return { name: "In-Progress", description: "Currently being developed" }
-    } else if (tab === "planned") {
+    } else if (status === "planned") {
       return {
         name: "Planned",
         description: "Ideas prioritized for research",
@@ -36,7 +51,7 @@ const RoadmapCard = () => {
           <FontAwesomeIcon
             icon={faCircle}
             className={`mr-2 md:mr-4 text-${tabColor()} text-[10px] ${
-              tab === "live" && "iconCircleLive"
+              status === "live" && "iconCircleLive"
             }`}
           />
           <p className="text-info text-sm xl:text-base">
@@ -44,25 +59,35 @@ const RoadmapCard = () => {
           </p>
         </div>
         <h4 className="mt-4 xl:mt-2 font-bold text-sm  xl:text-lg text-neutral">
-          Add tags for solutions
+          {title}
         </h4>
         <p className="text-info mt-2 xl:mt-1 text-left text-sm xl:text-base">
-          Easier to search for solutions based on a specific stack.
+          {description}
         </p>
         <div className="mt-6 xl:mt-4">
-          <InteractiveElement type="tag">Enhancement</InteractiveElement>
+          <InteractiveElement type="tag">
+            {category === "ui" ||
+            category === "ux" ||
+            category === "UI" ||
+            category === "UX"
+              ? category.toUpperCase()
+              : category.charAt(0).toUpperCase() +
+                category.substr(1).toLowerCase()}
+          </InteractiveElement>
         </div>
 
         <div className="flex flex-row justify-between mt-4">
           <InteractiveElement type="upvote" layout="row">
-            112
+            {upvotes}
           </InteractiveElement>
           <div className="flex flex-row items-center">
             <FontAwesomeIcon
               icon={faComment}
               className="self-center font-bold text-lg text-[#CDD2EE] mr-1 xl:mr-2"
             />
-            <p className="text-neutral text-sm font-bold">4</p>
+            <p className="text-neutral text-sm font-bold">
+              {calculateCommentsLength()}
+            </p>
           </div>
         </div>
       </div>

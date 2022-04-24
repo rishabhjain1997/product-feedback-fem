@@ -6,7 +6,8 @@ import RoadmapContext from "../context/roadmap/RoadmapContext"
 import { db } from "../firebase.config"
 
 const Roadmap = () => {
-  const { dispatch } = useContext(RoadmapContext)
+  const { dispatch, liveFeedbacks, plannedFeedbacks, inProgressFeedbacks } =
+    useContext(RoadmapContext)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -51,9 +52,21 @@ const Roadmap = () => {
     <div className="w-full h-screen bg-base-200">
       <RoadmapNav />
       <div className="my-4 px-6 md:px-0 md:w-[689px] xl:w-[1110px] md:mx-auto md:grid md:grid-cols-3 md:gap-4">
-        <RoadmapCard />
-        <RoadmapCard />
-        <RoadmapCard />
+        <div className="flex flex-col items-stretch">
+          {plannedFeedbacks?.map((feedback) => (
+            <RoadmapCard feedback={feedback.data} key={feedback.id} />
+          ))}
+        </div>
+        <div className="flex flex-col items-stretch">
+          {inProgressFeedbacks?.map((feedback) => (
+            <RoadmapCard feedback={feedback.data} key={feedback.id} />
+          ))}
+        </div>
+        <div className="flex flex-col items-stretch">
+          {liveFeedbacks?.map((feedback) => (
+            <RoadmapCard feedback={feedback.data} key={feedback.id} />
+          ))}
+        </div>
       </div>
     </div>
   )
