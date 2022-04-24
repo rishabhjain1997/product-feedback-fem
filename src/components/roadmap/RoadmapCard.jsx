@@ -44,7 +44,7 @@ const RoadmapCard = ({ feedback }) => {
   return (
     <div
       className={`bg-base-100 rounded-lg  
-    mb-4 w-full p-6  flex flex-row items-stretch border-t-8 border-${tabColor()}`}
+    mb-4 w-full p-6  flex flex-row items-stretch border-t-8 border-${tabColor()} md:min-h-[310px] xl:min-h-0`}
     >
       <div className="flex flex-col w-full">
         <div className="flex flex-row justify-start items-center">
@@ -64,7 +64,7 @@ const RoadmapCard = ({ feedback }) => {
         <p className="text-info mt-2 xl:mt-1 text-left text-sm xl:text-base">
           {description}
         </p>
-        <div className="mt-6 xl:mt-4">
+        <div className="mt-6 xl:mt-4  md:mt-auto">
           <InteractiveElement type="tag">
             {category === "ui" ||
             category === "ux" ||

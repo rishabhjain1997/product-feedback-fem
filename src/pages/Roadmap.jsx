@@ -6,8 +6,13 @@ import RoadmapContext from "../context/roadmap/RoadmapContext"
 import { db } from "../firebase.config"
 
 const Roadmap = () => {
-  const { dispatch, liveFeedbacks, plannedFeedbacks, inProgressFeedbacks } =
-    useContext(RoadmapContext)
+  const {
+    dispatch,
+    liveFeedbacks,
+    plannedFeedbacks,
+    inProgressFeedbacks,
+    tab,
+  } = useContext(RoadmapContext)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -48,22 +53,36 @@ const Roadmap = () => {
     fetchFeedbacks()
   }, [])
 
+  const getTabFeedbacks = () => {
+    if (tab === "in-progress") {
+      return inProgressFeedbacks
+    } else if (tab === "planned") {
+      return plannedFeedbacks
+    }
+    return liveFeedbacks
+  }
+
   return (
     <div className="w-full h-screen bg-base-200">
       <RoadmapNav />
-      <div className="my-4 px-6 md:px-0 md:w-[689px] xl:w-[1110px] md:mx-auto md:grid md:grid-cols-3 md:gap-4">
-        <div className="flex flex-col items-stretch">
+      <div className="my-4 px-6 md:px-0 md:w-[689px] xl:w-[1110px] md:mx-auto md:grid md:grid-cols-3 md:gap-4 ">
+        <div className="hidden flex-col items-stretch md:flex">
           {plannedFeedbacks?.map((feedback) => (
             <RoadmapCard feedback={feedback.data} key={feedback.id} />
           ))}
         </div>
-        <div className="flex flex-col items-stretch">
+        <div className="hidden flex-col items-stretch md:flex">
           {inProgressFeedbacks?.map((feedback) => (
             <RoadmapCard feedback={feedback.data} key={feedback.id} />
           ))}
         </div>
-        <div className="flex flex-col items-stretch">
+        <div className="hidden flex-col items-stretch md:flex">
           {liveFeedbacks?.map((feedback) => (
+            <RoadmapCard feedback={feedback.data} key={feedback.id} />
+          ))}
+        </div>
+        <div className="flex flex-col items-stretch md:hidden">
+          {getTabFeedbacks()?.map((feedback) => (
             <RoadmapCard feedback={feedback.data} key={feedback.id} />
           ))}
         </div>
