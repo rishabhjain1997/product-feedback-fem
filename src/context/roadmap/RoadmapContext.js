@@ -5,7 +5,11 @@ const RoadmapContext = createContext()
 
 export const RoadmapProvider = ({ children }) => {
   const initialState = {
+    liveFeedbacks: null,
+    plannedFeedbacks: null,
+    inProgressFeedbacks: null,
     loading: false,
+    tab: "in-progress",
   }
   const [state, dispatch] = useReducer(roadmapReducer, initialState)
   return (

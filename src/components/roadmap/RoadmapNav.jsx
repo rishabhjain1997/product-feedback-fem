@@ -3,12 +3,12 @@ import Button from "../shared/Button"
 import { useNavigate, Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
-import { useState } from "react"
+import { useContext } from "react"
+import RoadmapContext from "../../context/roadmap/RoadmapContext"
 
 const RoadmapNav = () => {
   const navigate = useNavigate()
-  // in-progress, planned, live
-  const [tab, setTab] = useState("in-progress")
+  const { dispatch, tab } = useContext(RoadmapContext)
 
   const getTabDetails = () => {
     if (tab === "in-progress") {
@@ -49,7 +49,12 @@ const RoadmapNav = () => {
             className={`cursor-pointer flex flex-col items-center justify-center border-b-4 ${
               tab === "planned" ? "border-warning" : "border-base-200"
             }`}
-            onClick={() => setTab("planned")}
+            onClick={() =>
+              dispatch({
+                type: "SET_TAB",
+                payload: "planned",
+              })
+            }
           >
             <p
               className={`cursor-pointer text-sm font-bold ${
@@ -63,7 +68,12 @@ const RoadmapNav = () => {
             className={`cursor-pointer flex flex-col items-center justify-center border-b-4 ${
               tab === "in-progress" ? "border-secondary" : "border-base-200"
             }`}
-            onClick={() => setTab("in-progress")}
+            onClick={() =>
+              dispatch({
+                type: "SET_TAB",
+                payload: "in-progress",
+              })
+            }
           >
             <p
               className={`cursor-pointer text-sm font-bold ${
@@ -77,7 +87,12 @@ const RoadmapNav = () => {
             className={`cursor-pointer flex flex-col items-center justify-center border-b-4 ${
               tab === "live" ? "border-accent" : "border-base-200"
             }`}
-            onClick={() => setTab("live")}
+            onClick={() =>
+              dispatch({
+                type: "SET_TAB",
+                payload: "live",
+              })
+            }
           >
             <p
               className={`cursor-pointer text-sm font-bold ${
