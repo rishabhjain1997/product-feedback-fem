@@ -13,6 +13,23 @@ const roadmapReducer = (state, action) => {
         inProgressFeedbacks: action.payload.inProgressFeedbacks,
         loading: false,
       }
+    case "UPDATE_FEEDBACKS":
+      if (action.payload.status === "in-progress") {
+        return {
+          ...state,
+          inProgressFeedbacks: action.payload.feedbacks,
+        }
+      }
+      if (action.payload.status === "planned") {
+        return {
+          ...state,
+          plannedFeedbacks: action.payload.feedbacks,
+        }
+      }
+      return {
+        ...state,
+        liveFeedbacks: action.payload.feedbacks,
+      }
     case "SET_TAB":
       return {
         ...state,

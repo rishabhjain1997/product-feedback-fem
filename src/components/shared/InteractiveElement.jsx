@@ -44,6 +44,7 @@ const InteractiveElement = ({
 InteractiveElement.defaultProps = {
   layout: "col",
   type: "tag",
+  incrementUpvote: () => {},
 }
 
 export default InteractiveElement

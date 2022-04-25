@@ -68,22 +68,22 @@ const Roadmap = () => {
       <div className="my-4 px-6 md:px-0 md:w-[689px] xl:w-[1110px] md:mx-auto md:grid md:grid-cols-3 md:gap-4 ">
         <div className="hidden flex-col items-stretch md:flex">
           {plannedFeedbacks?.map((feedback) => (
-            <RoadmapCard feedback={feedback.data} key={feedback.id} />
+            <RoadmapCard feedback={feedback} key={feedback.id} />
           ))}
         </div>
         <div className="hidden flex-col items-stretch md:flex">
           {inProgressFeedbacks?.map((feedback) => (
-            <RoadmapCard feedback={feedback.data} key={feedback.id} />
+            <RoadmapCard feedback={feedback} key={feedback.id} />
           ))}
         </div>
         <div className="hidden flex-col items-stretch md:flex">
           {liveFeedbacks?.map((feedback) => (
-            <RoadmapCard feedback={feedback.data} key={feedback.id} />
+            <RoadmapCard feedback={feedback} key={feedback.id} />
           ))}
         </div>
         <div className="flex flex-col items-stretch md:hidden">
           {getTabFeedbacks()?.map((feedback) => (
-            <RoadmapCard feedback={feedback.data} key={feedback.id} />
+            <RoadmapCard feedback={feedback} key={feedback.id} />
           ))}
         </div>
       </div>

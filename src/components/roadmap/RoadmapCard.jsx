@@ -1,11 +1,53 @@
-import React, { useState, useContext } from "react"
+import React, { useContext } from "react"
 import InteractiveElement from "../shared/InteractiveElement"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faComment, faCircle } from "@fortawesome/free-solid-svg-icons"
+import { db } from "../../firebase.config"
+import { doc, updateDoc } from "firebase/firestore"
 import RoadmapContext from "../../context/roadmap/RoadmapContext"
 
 const RoadmapCard = ({ feedback }) => {
-  const { status, category, title, description, upvotes, comments } = feedback
+  const { status, category, title, description, upvotes, comments } =
+    feedback.data
+
+  const { dispatch, liveFeedbacks, plannedFeedbacks, inProgressFeedbacks } =
+    useContext(RoadmapContext)
+
+  const getFeedbacks = () => {
+    if (status === "in-progress") {
+      return inProgressFeedbacks
+    } else if (status === "planned") {
+      return plannedFeedbacks
+    }
+    return liveFeedbacks
+  }
+
+  const incrementUpvote = async (docId, upvotes) => {
+    const docRef = doc(db, "productRequests", docId)
+    try {
+      await updateDoc(docRef, {
+        upvotes: upvotes + 1,
+      })
+
+      const feedbacks = getFeedbacks().map((feedback) => {
+        if (feedback.id === docId) {
+          feedback.data.upvotes += 1
+        }
+        return feedback
+      })
+
+      dispatch({
+        type: "UPDATE_FEEDBACKS",
+        payload: {
+          feedbacks,
+          status,
+        },
+      })
+    } catch (error) {
+      // TODO - Change to Toast
+      console.log("Could not update")
+    }
+  }
 
   const calculateCommentsLength = () => {
     if (!comments || !comments.length) {
@@ -77,7 +119,13 @@ const RoadmapCard = ({ feedback }) => {
         </div>
 
         <div className="flex flex-row justify-between mt-4">
-          <InteractiveElement type="upvote" layout="row">
+          <InteractiveElement
+            type="upvote"
+            layout="row"
+            incrementUpvote={incrementUpvote}
+            docId={feedback.id}
+            upvotes={upvotes}
+          >
             {upvotes}
           </InteractiveElement>
           <div className="flex flex-row items-center">
