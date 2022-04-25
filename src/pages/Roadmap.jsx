@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react"
 import RoadmapCard from "../components/roadmap/RoadmapCard"
 import RoadmapNav from "../components/roadmap/RoadmapNav"
-import { collection, query, where, getDocs, orderBy } from "firebase/firestore"
+import { collection, query, getDocs, orderBy } from "firebase/firestore"
 import RoadmapContext from "../context/roadmap/RoadmapContext"
 import { db } from "../firebase.config"
 

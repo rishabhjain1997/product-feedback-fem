@@ -5,6 +5,7 @@ import { faComment, faCircle } from "@fortawesome/free-solid-svg-icons"
 import { db } from "../../firebase.config"
 import { doc, updateDoc } from "firebase/firestore"
 import RoadmapContext from "../../context/roadmap/RoadmapContext"
+import { Link } from "react-router-dom"
 
 const RoadmapCard = ({ feedback }) => {
   const { status, category, title, description, upvotes, comments } =
@@ -89,7 +90,10 @@ const RoadmapCard = ({ feedback }) => {
     mb-4 w-full p-6  flex flex-row items-stretch border-t-8 border-${tabColor()} md:min-h-[310px] xl:min-h-0`}
     >
       <div className="flex flex-col w-full">
-        <div className="flex flex-row justify-start items-center">
+        <Link
+          to={`/feedback-detail/${feedback.data.id}`}
+          className="flex flex-row justify-start items-center"
+        >
           <FontAwesomeIcon
             icon={faCircle}
             className={`mr-2 md:mr-4 text-${tabColor()} text-[10px] ${
@@ -99,14 +103,23 @@ const RoadmapCard = ({ feedback }) => {
           <p className="text-info text-sm xl:text-base">
             {getTabDetails().name}
           </p>
-        </div>
-        <h4 className="mt-4 xl:mt-2 font-bold text-sm  xl:text-lg text-neutral">
+        </Link>
+        <Link
+          to={`/feedback-detail/${feedback.data.id}`}
+          className="mt-4 xl:mt-2 font-bold text-sm  xl:text-lg text-neutral"
+        >
           {title}
-        </h4>
-        <p className="text-info mt-2 xl:mt-1 text-left text-sm xl:text-base">
+        </Link>
+        <Link
+          to={`/feedback-detail/${feedback.data.id}`}
+          className="text-info mt-2 xl:mt-1 text-left text-sm xl:text-base"
+        >
           {description}
-        </p>
-        <div className="mt-6 xl:mt-4  md:mt-auto">
+        </Link>
+        <Link
+          to={`/feedback-detail/${feedback.data.id}`}
+          className="mt-6 xl:mt-4  md:mt-auto"
+        >
           <InteractiveElement type="tag">
             {category === "ui" ||
             category === "ux" ||
@@ -116,7 +129,7 @@ const RoadmapCard = ({ feedback }) => {
               : category.charAt(0).toUpperCase() +
                 category.substr(1).toLowerCase()}
           </InteractiveElement>
-        </div>
+        </Link>
 
         <div className="flex flex-row justify-between mt-4">
           <InteractiveElement
@@ -128,7 +141,10 @@ const RoadmapCard = ({ feedback }) => {
           >
             {upvotes}
           </InteractiveElement>
-          <div className="flex flex-row items-center">
+          <Link
+            to={`/feedback-detail/${feedback.data.id}`}
+            className="flex flex-row items-center"
+          >
             <FontAwesomeIcon
               icon={faComment}
               className="self-center font-bold text-lg text-[#CDD2EE] mr-1 xl:mr-2"
@@ -136,7 +152,7 @@ const RoadmapCard = ({ feedback }) => {
             <p className="text-neutral text-sm font-bold">
               {calculateCommentsLength()}
             </p>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

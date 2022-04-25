@@ -56,6 +56,7 @@ const FeedbackDetail = () => {
         })
       })
       const feedback = feedbacks[0]
+
       dispatch({
         type: "SET_FEEDBACK",
         payload: { ...feedback.data, docId: feedback.id },
